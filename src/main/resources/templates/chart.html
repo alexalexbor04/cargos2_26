@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Гистограмма</title>
+    <style>
+        body {
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(236, 143, 173);
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <img th:src="@{${chart_send}}" alt="Гистограмма" />
+    <img th:src="@{${chart_arr}}" alt="Гистограмма" />
+  </body>
+</html>
