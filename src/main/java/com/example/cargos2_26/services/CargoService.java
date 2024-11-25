@@ -1,5 +1,7 @@
-package com.example.cargos2_26;
+package com.example.cargos2_26.services;
 
+import com.example.cargos2_26.repos.CargoRepository;
+import com.example.cargos2_26.entity.Cargos;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;

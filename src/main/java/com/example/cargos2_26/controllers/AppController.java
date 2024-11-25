@@ -1,5 +1,7 @@
-package com.example.cargos2_26;
+package com.example.cargos2_26.controllers;
 
+import com.example.cargos2_26.entity.Cargos;
+import com.example.cargos2_26.services.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;

@@ -1,5 +1,6 @@
-package com.example.cargos2_26;
+package com.example.cargos2_26.repos;
 
+import com.example.cargos2_26.entity.Cargos;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

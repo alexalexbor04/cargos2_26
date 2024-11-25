@@ -1,4 +1,4 @@
-package com.example.cargos2_26;
+package com.example.cargos2_26.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
