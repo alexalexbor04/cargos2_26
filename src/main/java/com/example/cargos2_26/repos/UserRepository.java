@@ -11,7 +11,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<Users, Long> {
     Users findByUsername(String username);
 
-    @Query("SELECT u FROM Users u WHERE u.id > :paramId")
+    @Query("SELECT u FROM Users u WHERE u.id > :idMin")
     List<Users> usergetList(Long idMin);
 }
 
