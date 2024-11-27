@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Вход в аккаунт</title>
+</head>
+<body>
+<h1>Вход в аккаунт</h1>
+
+<!-- Отображается только для авторизованных пользователей -->
+<div th:if="${#authentication.principal}">
+    <script th:inline="javascript">
+        /* Переадресация на главную страницу, если пользователь уже вошел в систему */
+        window.location.replace('/');
+    </script>
+</div>
+
+<!-- Форма входа -->
+<form th:action="@{/login}" method="post">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Имя пользователя">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Пароль">
+    </div>
+    <button type="submit">Login</button>
+</form>
+
+</body>
+</html>

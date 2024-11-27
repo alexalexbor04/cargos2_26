@@ -34,7 +34,7 @@ public class AppController {
         List<Cargos> listCargos = service.filterBySendingDate(sending_date);
         model.addAttribute("listCargos", listCargos);
         model.addAttribute("sending_date", sending_date);
-        return "index";
+        return "index_adm";
     }
 
     @RequestMapping("/filterByArrivalDate")
@@ -42,7 +42,7 @@ public class AppController {
         List<Cargos> listCargos = service.filterByArrivalDate(arrival_date);
         model.addAttribute("listCargos", listCargos);
         model.addAttribute("arrival_date", arrival_date);
-        return "index";
+        return "index_adm";
     }
 
     @RequestMapping("/new")

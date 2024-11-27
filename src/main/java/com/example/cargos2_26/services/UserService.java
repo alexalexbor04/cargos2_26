@@ -23,8 +23,6 @@ public class UserService implements UserDetailsService {
     RoleRepository repoRole;
     PasswordEncoder passwordEncoder;
 
-    //    BCryptPasswordEncoder passwordEncoder;
-
     @Autowired
     public UserService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Система перевозки грузов</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(236, 143, 173);
+        align-items: center;
+      }
+      .btn {
+        padding: 5px 5px 5px 5px;
+        border-radius: 10px;
+        border: none;
+        background-color: rgb(112, 186, 200);
+        color: rgb(14, 10, 10);
+        margin: 5px 0;
+      }
+
+      .btn:hover {
+        background-color: #d5cc55;
+        color: black;
+        transition-duration: 0.3s;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .search_filters {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 20px;
+        justify-content: center;
+      }
+
+      .additional_filters {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 20px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .filter_name {
+        padding: 0;
+        margin: 0;
+      }
+      .input_field {
+        padding: 5px;
+        border: none;
+        border-radius: 5px;
+      }
+
+      table {
+        border: 1px solid black;
+        border-collapse: collapse;
+        width: 100%;
+        display: table;
+        text-align: center;
+        table-layout: fixed;
+      }
+      thead {
+        border: 2px solid black;
+      }
+
+      table tr th {
+        border-right: 1px solid black;
+        color: black;
+      }
+      .btn-warning {
+        margin-left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Система перевозки грузов</h1>
+      <div class="rows">
+        <div class="search_filters">
+          <form th:action="@{/}">
+            <input
+              class="input_field"
+              placeholder="Поиск груза"
+              type="text"
+              name="keyword"
+              id="keyword"
+              size="70"
+              th:value="${keyword}"
+              required
+            />
+            <input type="submit" class="btn btn-success" value="Поиск" />
+            <input
+              type="button"
+              class="btn btn-warning"
+              value="Очистить"
+              id="btnClear"
+              onclick="clearSearch()"
+            />
+          </form>
+        </div>
+        <div class="additional_filters">
+          <h4 class="filter_name">Фильтр по дате отправки:</h4>
+          <form th:action="@{/filterBySendingDate}">
+            <input type="date" id="sending_date" name="sending_date" required />
+            <input type="submit" class="btn btn-success" value="Выбрать" />
+            <input
+              type="button"
+              class="btn btn-warning"
+              value="Очистить"
+              id="clear_s"
+              onclick="clearSearch()"
+            />
+          </form>
+          <h4 class="filter_name">Фильтр по дате прибытия:</h4>
+          <form th:action="@{/filterByArrivalDate}">
+            <input type="date" id="arrival_date" name="arrival_date" required />
+            <input type="submit" class="btn btn-success" value="Выбрать" />
+            <input
+              type="button"
+              class="btn btn-warning"
+              value="Очистить"
+              id="clear_a"
+              onclick="clearSearch()"
+            />
+          </form>
+          <h4 class="chart">Гистограмма:</h4>
+          <form th:action="@{/getChart}"></form>
+          <a th:href="@{'/chart'}"
+            ><button type="button" class="btn btn-info">Посмотреть</button></a
+          >
+        </div>
+      </div>
+      <table class="table" id="1">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Название груза</th>
+            <th scope="col">Содержимое</th>
+            <th scope="col">Город отправки</th>
+            <th scope="col">Дата отправки</th>
+            <th scope="col">Город прибытия</th>
+            <th scope="col">Дата прибытия</th>
+            <th scope="col">Действие:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="cargos: ${listCargos}">
+            <th scope="row" th:text="${cargos.id}">нет</th>
+            <th scope="row" th:text="${cargos.name}">нет</th>
+            <th scope="row" th:text="${cargos.content}">нет</th>
+            <th scope="row" th:text="${cargos.sending_city}">нет</th>
+            <th scope="row" th:text="${cargos.sending_date}">нет</th>
+            <th scope="row" th:text="${cargos.arrival_city}">нет</th>
+            <th scope="row" th:text="${cargos.arrival_date}">нет</th>
+            <td>
+              <a th:href="@{'/edit/'+${cargos.id}}"
+                ><button type="button" class="btn btn-info">
+                  Редактировать
+                </button></a
+              >
+              <a th:href="@{'/delete/'+${cargos.id}}"
+                ><button type="button" class="btn btn-danger">
+                  Удалить
+                </button></a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="container">
+        <script type="text/javascript">
+          function getRowsColumn() {
+            let table = document.getElementById("1");
+            let tBody = table.querySelector("tbody");
+            const count = tBody.querySelectorAll("tr").length;
+            document.write("Количество грузов в таблице: " + count);
+          }
+
+          getRowsColumn();
+        </script>
+      </div>
+      <blockquote class="blockquote">
+        <a href="/new">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-togge="button"
+            aria-pressed="false"
+            autocomplete="off"
+          >
+            Добавить
+          </button>
+        </a>
+      </blockquote>
+    </div>
+    <script type="text/javascript">
+      function clearSearch() {
+        window.location = "[[@{/}]]";
+      }
+    </script>
+  </body>
+</html>
